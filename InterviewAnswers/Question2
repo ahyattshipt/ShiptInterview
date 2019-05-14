@@ -1,0 +1,58 @@
+2. Locate one bug or bad workflow within the app.
+    a. Explain the behavior you are seeing
+    b. Include any useful errors or screenshots
+    c. Explain why and how it needs to be corrected
+    d. What are the steps you would take to report the issue?
+    e. What priority would you give this bug (Scale of 1-5, 1 being highest) and why?
+
+------------------------------------------------------------------------------------------
+
+a.
+
+Bug: Unable to remove item due to blur effect in the "Recommended for You" section of the
+item description modal
+
+Steps to Reproduce:
+    1) Login as a user with a membership
+    2) Click an item to bring up it's item description modal
+    3) In the "Recommended for You" section below, click the right arrow to see more items
+    4) On the leftmost item, click the green (+) button to add the item to the cart
+    5) Click the green trash can button
+
+Expected: The item is removed from the cart
+
+Actual: The item cannot be removed - the blur affect at the left edge of the modal is
+overlapping the remove button preventing the user from removing the item
+
+b. See ScreenRecordings/2B.mov
+
+c.
+
+Why it needs to be corrected: The user is not able to remove this item from their cart the
+way the user experience intends them to. This could create frustration and impact the user’s
+opinion of the company.
+
+How it needs to be corrected: Either the remove button needs to be rendered above the blur
+effect, or the blur effect needs to be reduced / removed so that the user is able to click the
+remove button, depending on the resulting look and feel.
+
+d.
+
+1) Create a bug ticket with the following information:
+    a) A small high level description
+    b) Steps to reproduce the bug
+    c) The expected behavior
+    d) The actual behavior
+    e) The device and browser version the bug was found on (ex: Desktop, Chrome v74)
+    f) The environment the bug was found in (i.e. Production, UAT, Staging)
+2) Notify the team of the bug and confirm it is reproducible
+3) Based on the priority, the bug ticket would either be put in the backlog (low priority), put
+into the next sprint (medium priority) or worked on as soon as possible as a hot fix (high priority)
+
+e.
+
+I would give this bug a 4 for priority for the following reasons:
+	-It is not fundamentally breaking any functionality of the site; the user is still able to
+	remove the item from their cart on the cart page
+	-It is nested within the item modal (lower rate of use) as opposed to logging in (higher rate of use)
+	-It can create an unpleasant user experience and should have priority over smaller bugs (5)

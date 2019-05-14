@@ -1,0 +1,25 @@
+3. What are the possible reasons for the following defect? How would you go about
+debugging the problem and gathering more information?
+
+On a web application, a user adds a phone number to their account. The user
+then changes the phone number. Upon trying to re-enter the first phone number,
+the user is allowed to click Save, and it seems to work, but the saved number
+remains the second number rather than updating to the more recently entered
+number. A page refresh does not change the result.
+
+------------------------------------------------------------------------------------------
+
+The fact that "it seems to work" tells me that the UI is responding as expected to the
+user's actions. The user entered a phone number, and changed it successfully, meaning the
+new phone number entered by the user was written to the database and the new value was
+rendered successfully. This defect is occurring specifically with a number that has existed
+on the users account.
+
+I would debug the issue by recreating the scenario and observing the request from UI to determine
+where the defect is occurring. If the UI request has the correct phone number, then the issue
+is occurring from the database. Perhaps there is a record saved of previous phone numbers on
+each account, and the defect is caused by only writing to the database if the phone number is
+unique to the account. If the UI request does not have the correct phone number, then the issue
+is occurring from the UI. Perhaps there is a defect in the validation of the phone number, that
+fails if the number was previously entered however the failure is not shown to the user and the
+previous number persists.

@@ -1,0 +1,36 @@
+1. If you chose to use a tool or language other than the recommended, briefly explain why.
+2. How do you debug a failed test in your test framework?
+3. What do you believe are the most common causes for instability in UI automation?
+4. How do you make your tests consistent and easy to debug?
+
+---------------------------------------------------------------------------------------------
+
+1. I chose to use Selenium-Java and Gherkin because I am most familiar with these tools. I also
+knew that Gherkin has a Scenario Outline feature that makes it easy to specify different input for
+the same test case, which helped implement the "Runs the same test with more than 1 username/password
+combination" requirement.
+
+Having said that, I am open to learning new tools and languages so I am excited for the potential to
+learn about the recommended tools / languages and discuss both their advantages and disadvantages.
+
+2. To debug a failed test, I would use breakpoints around the line that failed to step through each
+line and confirm that (1) any variables or elements are as expected and (2) the test is not failing
+due to the framework moving faster than the application. It is possible a regression test is no longer
+valid and needs to be updated, or if this is an unexpected error I would report a bug with details of
+the failure.
+
+3. One of the most common causes for instability are flaky tests. It is incredibly important for
+engineers to make sure that their UI tests pass consistently regardless of how many times they are
+run and are not dependent on information that can change such as dates or changes to data in the db.
+Another common cause of instability is due to a flaky environment. Typically engineers write and run
+tests locally before pushing their code such that the tests are then run on a development or staging
+environment. Confirming that there is no discrepancy between the environment that tests are developed
+on versus the environment tests are run on is crucial to maintaining a stable test framework.
+
+4. Since test frameworks run much faster than a web app would expect a user to perform actions, a common
+issue concerning consistency is when the framework is trying to run commands that the site is not ready
+for (ex: trying to click an element before it has rendered). It is important to check that elements exist
+on the page and are displayed before trying to interact with them, otherwise this leads to inconsistent
+timing issues. I use assert statements frequently throughout tests to confirm that the state of the
+application is as expected before moving forward. These assert statements also enable me to write clear
+and informative error messages to make tests easy to debug when they fail.

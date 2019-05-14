@@ -1,0 +1,47 @@
+1. Navigate to www.shipt.com. Choose a feature of the site and write a description or test
+case to describe how to test the feature. By navigating to the Login page, you can
+complete the Create Account flow in order to test inside the web app.
+
+------------------------------------------------------------------------------------------
+
+Feature: Free delivery on orders over $35
+
+Note: In the below scenarios I am assuming the delivery fee is a flat rate of $7.00
+
+Scenarios:
+
+Standard Delivery
+
+    1) Add items to your cart such that the subtotal is less than or equal to $35
+    2) Navigate to the cart
+    3) The delivery message has text “Free delivery on orders over $35!”
+    4) Click checkout
+    5) In the order details, the delivery fee is equal to $7.00
+
+Free Delivery
+
+    1) Add items to your cart such that the subtotal is greater than $35
+    2) Navigate to the cart
+    3) The delivery message has text “Your order qualifies for free delivery!”
+    4) Click checkout
+    5) In the order details, the delivery fee is equal to $0.00
+
+Removing Items Loses Free Delivery
+
+    1) Add items to your cart such that the subtotal is greater than $35
+    2) Navigate to the cart
+    3) The delivery message has text “Your order qualifies for free delivery!”
+    4) Remove items from your cart until the subtotal is less than or equal to $35
+    5) The delivery message text changes to “Free delivery on orders over $35!”
+    6) Click checkout
+    7) In the order details, the delivery fee is equal to $7.00
+
+Adding Items Grants Free Delivery
+
+    1) Add items to your cart such that the subtotal is less than or equal to $35
+    2) Navigate to the cart
+    3) The delivery message has text “Free delivery on orders over $35!”
+    4) Change the quantity of the items in your cart until the subtotal is greater than $35
+    5) The delivery message text changes to “Your order qualifies for free delivery!”
+    6) Click checkout
+    7) In the order details, the delivery fee is equal to $0.00

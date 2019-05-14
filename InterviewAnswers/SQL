@@ -1,0 +1,119 @@
+1. List the stores allowed to sell alcohol
+
+SQL Statements:
+
+Select name from interview.stores
+Where allowed_alcohol=true
+
+Result:
+
+'Gettar'
+
+------------------------------------------------------------------------------------------------------
+
+2. Give the product name of the 2 most expensive items based on their price at store id 1
+
+SQL Statements:
+
+Select interview.products.name
+From interview.products, interview.store_prices
+Where interview.products.id=interview.store_prices.product_id
+Order by price desc
+Limit 2
+
+Result:
+
+'Golden Banana'
+'Banana'
+
+------------------------------------------------------------------------------------------------------
+
+3. List the products that are not sold in the store id 2
+
+SQL Statements:
+
+Select interview.products.name
+From interview.products, interview.store_prices
+Where interview.products.id=interview.store_prices.product_id and store_id!=2
+
+Result:
+
+'Banana'
+'Grapes'
+'Golden Banana'
+
+------------------------------------------------------------------------------------------------------
+
+4. What is the most popular item sold?
+
+SQL Statements:
+
+Select interview.products.name
+From interview.products, interview.order_lines
+Where interview.products.id=interview.order_lines.product_id
+Order by qty desc
+Limit 1
+
+Result:
+
+'Banana'
+
+------------------------------------------------------------------------------------------------------
+
+5. Write a SQL statement to update the line_total field
+
+SQL Statements:
+
+Update interview.order_lines
+Set line_total =
+  (Select qty
+   From interview.order_lines
+   Where id = 1)
+   *
+  (Select interview.store_prices.price
+   From interview.store_prices, interview.order_lines
+   Where interview.store_prices.product_id = interview.order_lines.product_id and
+   interview.order_lines.id = 1)
+Where id = 1
+
+Update interview.order_lines
+Set line_total =
+  (Select qty
+   From interview.order_lines
+   Where id = 2)
+   *
+  (Select interview.store_prices.price
+   From interview.store_prices, interview.order_lines
+   Where interview.store_prices.product_id = interview.order_lines.product_id and
+   interview.order_lines.id = 2)
+Where id = 2
+
+Update interview.order_lines
+Set line_total =
+  (Select qty
+   From interview.order_lines
+   Where id = 3)
+   *
+  (Select interview.store_prices.price
+   From interview.store_prices, interview.order_lines
+   Where interview.store_prices.product_id = interview.order_lines.product_id and
+   interview.order_lines.id = 3)
+Where id = 3
+
+Update interview.order_lines
+Set line_total =
+  (Select qty
+   From interview.order_lines
+   Where id = 4)
+   *
+  (Select interview.store_prices.price
+   From interview.store_prices, interview.order_lines
+   Where interview.store_prices.product_id = interview.order_lines.product_id and
+   interview.order_lines.id = 4)
+Where id = 4
+
+Result:
+
+interview.store_prices.line_total is update to qty * price of product
+
+Note: ideally this would be handled in a loop or in one query but I was unsure of how to accomplish this
